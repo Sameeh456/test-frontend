@@ -1,0 +1,15 @@
+<div class="container-fluid p-5" style="background-color: #f4f4f4; height: 590px;">
+    <div class="container" style="background-color: white; height: 100%; max-width: 700px;">
+        <div class="login-box text-center">
+            <h1 class="my-4">Log In</h1>
+            <p class="my-3">
+                Don't have an account? <a routerLink="/ac/signup" style="color: blue;">Register here</a>
+            </p>
+            <form [formGroup]="loginForm">
+                <input class="my-2 form-control" type="text" name="email" class="form-control" formControlName="email" placeholder="Username" style="width: 100%;" />
+                <input class="my-2 form-control" type="password" name="password" class="form-control" formControlName="password" placeholder="Password" style="width: 100%;" />
+                <button class="btn btn-primary my-2" (click)="onLogin()" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

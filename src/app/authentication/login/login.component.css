@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    border-radius: 10px;
+  }
+  
+  .login-box {
+    margin: auto;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  input,
+  button {
+    height: 2.75rem;
+    padding: 10px;
+  }
+  
+ 
+  

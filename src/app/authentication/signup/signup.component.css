@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    border-radius: 10px;
+  }
+  
+  .login-box {
+    margin: auto;
+    width: 100%;
+  }
+  
+  input,
+  button {
+    height: 2.75rem;
+    padding: 10px;
+  }
+  
+  .input-group-text {
+    min-width: 130px;
+  }
+
+  .input-group-text, input, select {
+    height: 2.5rem;
+  }
+
+  input.ng-invalid.ng-touched,
+  select.ng-invalid.ng-touched {
+  border-color: red;
+}
+  

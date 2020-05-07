@@ -1,0 +1,40 @@
+<div class="container-fluid p-2" style="background-color: #f4f4f4;">
+
+    <div class="container my-5 py-5 px-5" style="background-color: white; height: 100%; max-width: 700px;">
+        <div class="login-box text-center mx-2">
+            <h2 class="my-4">Signup</h2>
+            <p class="my-3">
+                Alreagy signed up? <a routerLink="/ac/login" style="color: blue;">Login here</a>
+            </p>
+            <div class="alert alert-danger mb-3" role="alert" *ngIf="signupMessage" style="max-width: 1000px; margin: auto;">
+                <li class="m-0" style="text-align: left;">{{signupMessage.message}}</li>
+            </div>
+            <div class="alert alert-success mb-3" role="alert" *ngIf="errorMessage.length" style="max-width: 1000px; margin: auto;">
+                <div *ngFor=" let each of errorMessage">
+                    <li class="m-0" style="text-align: left;">{{each.msg}}</li>
+                </div>
+            </div>
+            <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Login Email</span>
+                    </div>
+                    <input type="email" name="email" class="form-control" formControlName="email" placeholder="Email" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Password</span>
+                    </div>
+                    <input type="password" name="password" class="form-control" formControlName="password" placeholder="Password" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Username</span>
+                    </div>
+                    <input type="text" name="name" class="form-control" formControlName="username" placeholder="Name" />
+                </div>
+                <button class="btn btn-primary my-2" style="width: 100%;">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>

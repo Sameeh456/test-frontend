@@ -9,9 +9,14 @@ import { SignupComponent } from '../authentication/signup/signup.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  imports: [CommonModule, PagesRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, SharedModule],
-  declarations: [
-    HomeComponent,
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule,
   ],
+  declarations: [HomeComponent],
 })
 export class PagesModule { }

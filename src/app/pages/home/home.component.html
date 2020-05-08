@@ -5,41 +5,61 @@
         </div>
         <div class="card-body">
             <div [formGroup]="Q1Form" (ngSumbit)="onClick()" class="input-group mb-3">
-                <input type="text" class="form-control" formControlName="index" placeholder="Enter the index here" aria-label="Recipient's username"
-                    aria-describedby="button-addon2">
+                <input type="text" class="form-control" formControlName="index" placeholder="Enter the index here" />
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="onClick()" type="submit" id="button-addon2">Enter</button>
+                    <button class="btn btn-outline-secondary" (click)="onClick()" type="submit">
+                        Enter
+                    </button>
                 </div>
             </div>
-            <h6>Result here: {{result}}</h6>
+            <h6>Result here: {{ result }}</h6>
         </div>
     </div>
 
     <div class="card mt-5">
         <div class="card-header row m-0">
             Q2
-            <button type="button" class="btn btn-primary btn-sm ml-auto px-3" (click)="onAddComponentX()">Add X</button>
+            <button type="button" class="btn btn-primary btn-sm ml-auto px-3" (click)="addX()">
+                Add X
+            </button>
         </div>
         <div class="card-body">
-            <div *ngFor="let item of arrayX; let i = index">
-                <div class="card mt-2">
-                    <div class="card-header row m-0">
-                        X
-                        <button type="button" class="btn btn-primary btn-sm ml-auto px-3" (click)="onAddComponentY(i)">Add Y</button>
-                    </div>
-                    <div class="card-body">
-                        <div *ngFor="let each of arrayX[i]; let y=index">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="{{arrayX[i][y]}}" placeholder="Enter the index here" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" (click)="onClickSave(i, y)" type="submit" id="button-addon2">Save</button>
+            <form [formGroup]="Q2Form">
+                <div formArrayName="Data">
+                    <div class="Data" *ngFor="
+                let xItem of Q2Form.get('Data')['controls'];
+                let xIndex = index
+              " [formGroupName]="xIndex">
+                        <div class="card mt-2">
+                            <div class="card-header row m-0">
+                                X
+                                <button type="button" class="btn btn-primary btn-sm ml-auto px-3" (click)="addY(xItem)">
+                                    Add Y
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div formArrayName="X">
+                                    <div class="X" *ngFor="
+                        let yItem of xItem.get('X')['controls'];
+                        let yIndex = index
+                      " [formGroupName]="yIndex">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" formControlName="Y" placeholder="Enter text here" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" (click)="onClickSave(xIndex, yIndex)" type="submit">
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
+        <!-- <h6 class="ml-4 mb-4">Data: {{FinalData | json }} </h6> -->
+        <h6 class="ml-4 mb-4">Data: {{orderedData | json }} </h6>
     </div>
 </div>

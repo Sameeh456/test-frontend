@@ -21,7 +21,7 @@ export class AppComponent {
     private _connService: ConnNotificationService) {
     this._connService.getMessage().subscribe(val => {
       this.connStatus = val
-      console.log(val)
+      // console.log(val)
       if (this.connStatus == true) {
         this.router.navigate(['/home'])
       } else {

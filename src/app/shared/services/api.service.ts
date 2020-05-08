@@ -19,16 +19,24 @@ export class ApiService {
     private connNotificationService: ConnNotificationService,
     private localService: LocalService
   ) {
-    console.log(localService.localStorage)
+    // console.log(localService.localStorage)
     if (localService.localStorage) {
       this.token = localService.localStorage['token'];
-      console.log(this.token, "hello")
-      if (this.token) {
-        this.isAuthenticated = true;
-        this.authStatusListener.next(true);
-        this.router.navigate(["/home"]);
-        this.connNotificationService.sendMessage(true);
+      // console.log(this.token, "hello")
+      const time_now = (new Date()).getTime();
+      // console.log((time_now - +localService.localStorage['logTime']), 'in Time')
+      if ((time_now - +localService.localStorage['logTime']) > 1000 * 60 * 60) {
+        localStorage.removeItem('userData')
+        this.localService.localStorage = null;
+      } else {
+        if (this.token) {
+          this.isAuthenticated = true;
+          this.authStatusListener.next(true);
+          this.router.navigate(["/home"]);
+          this.connNotificationService.sendMessage(true);
+        }
       }
+
     }
   }
 
@@ -50,7 +58,10 @@ export class ApiService {
     return this.http
       .post<{ token: string }>(`${environment.apiUrl}login`, loginData)
       .subscribe((res) => {
-        console.log(res);
+        // console.log(res);
+        const time_now = (new Date()).getTime();
+        const userData = res
+        userData['logTime'] = time_now
         localStorage.setItem('userData', JSON.stringify(res))
         const token = res.token;
         this.token = token;
@@ -70,6 +81,18 @@ export class ApiService {
   }
 
   getisAuth() {
+    if (this.localService.localStorage) {
+      const time_now = (new Date()).getTime();
+      if ((time_now - +this.localService.localStorage['logTime']) > 1000 * 60 * 60) {
+        localStorage.removeItem('userData')
+        this.localService.localStorage = null;
+        this.token = null;
+        this.isAuthenticated = false;
+        this.authStatusListener.next(false);
+        this.connNotificationService.sendMessage(false);
+        this.router.navigate(["/ac/home"]);
+      }
+    }
     return this.isAuthenticated;
   }
 
